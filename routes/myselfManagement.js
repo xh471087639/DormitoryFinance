@@ -11,9 +11,6 @@ const powerModels=require('../models/power');
 
 const router=express.Router();
 
-router.get('/',function (req,res,next) {
-    res.sendFile(path.resolve('./views/html/regist.html'));
-})
 
 router.get('/',function (req,res,next) {
     res.render('myselfManagement', {title: 'HTML'});
@@ -29,6 +26,9 @@ router.post('/getMessage',function (req,res,next) {
         try {
             if (!req.session.user.userId){
                 throw new Error('请先登录');
+            }
+            if (fields.page){
+                fields.page[0]>0?page=fields.page[0]: void (0);
             }
         }catch (e) {
             res.json({
@@ -51,40 +51,38 @@ router.post('/getMessage',function (req,res,next) {
         }
         let promise=new Promise(function (resolve, reject) {
             for (let i=0;i<list;i++){
-
-                if (i==list-1){
+                if (i==list-1 ){
                     userMessage
-                        .findUserMessage(messageIdQueue[3*(page-1)+list])
+                        .findUserMessage(messageIdQueue[3*(page-1)+i])
                         .then(function (result) {
                             let oneMessage=result;
-                            console.log(result);
                             message.push(oneMessage);
-                            resolve();
+                            resolve({});
                         })
+                    break;
                 }else {
                     userMessage
-                        .findUserMessage(messageIdQueue[3*(page-1)+list])
+                        .findUserMessage(messageIdQueue[3*(page-1)+i])
                         .then(function (result) {
                             let oneMessage=result;
-                            console.log(result);
                             message.push(oneMessage);
                         })
                 }
+
             }
 
-        });
-        promise
-            .then(function (resolve, reject) {
+            if (list==0){
+                resolve({});
+            }
+
+        }).then(function (data) {
                 res.json({
                     'status':'200',
                     'msg':'成功获取个人消息',
                     'message':message
                 })
                 return res.send();
-                resolve();
             })
-
-
     })
 })
 
@@ -110,7 +108,7 @@ router.post('/confirmAccession',function (req,res,next) {
                 if (!req.session.user.messageIdQueue){
                     throw new Error('您未收到该邀请函');
                 }
-                if (req.session.user.messageIdQueue.split(',').indexOf(fields.messageId[0])){
+                if (req.session.user.messageIdQueue.split(',').indexOf(fields.messageId[0])==-1){
                     throw new Error('您未持有该邀请函');
                 }
             }
@@ -126,7 +124,6 @@ router.post('/confirmAccession',function (req,res,next) {
             userMessage
                 .findUserMessage(fields.messageId[0])
                 .then(function (result) {
-                    console.log(result);
                     try {
                         if (!result){
                             throw new Error('未找在库中找到邀请函');
@@ -178,7 +175,6 @@ router.post('/confirmAccession',function (req,res,next) {
                 return new Promise(function (resolve,reject) {
                     userModels
                         .updataUserDormitory(req.session.user.userId,fields.dormitoryId[0]);
-                    console.log(data);
                     dormitory
                         .updataInformation(fields.dormitoryId[0],{dormitoryMenber:data.dormitoryMenber+','+req.session.user.userId});
 
@@ -186,7 +182,8 @@ router.post('/confirmAccession',function (req,res,next) {
                         .updataMessage(fields.messageId[0],{
                             type:'processed',
                             detail:'您已同意加入该宿舍'
-                        });
+                        })
+
 
                     powerModels
                         .createPower({
@@ -246,7 +243,6 @@ router.post('/confirmRefuse',function (req,res,next) {
                 userMessage
                     .findUserMessage(fields.messageId[0])
                     .then(function (result) {
-                        console.log(result);
                         try {
                             if (!result){
                                 throw new Error('未找在库中找到邀请函');
@@ -315,5 +311,6 @@ router.post('/confirmRefuse',function (req,res,next) {
 
     })
 })
+
 
 module.exports=router;

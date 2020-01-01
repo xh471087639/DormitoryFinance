@@ -19,6 +19,10 @@ module.exports={
         return power
             .update({userId:aimUserId},{$set:{create:true,update:true,delete:true}})
             .exec();
-
+    },
+    linshi:function (aimUserId) {
+        return power
+            .update({userId:aimUserId},{$set:{create:true,update:true,delete:true}})
+            .exec();
     },
 }

@@ -1,0 +1,71 @@
+body{
+    overflow-x:hidden;
+    color: white;
+    background-image: url("../img/indexBG.jpeg");
+    background-position: center bottom;
+    height: 100%;
+    width: 100%;
+    font-size: 34px;
+    position: absolute;
+}
+.main{
+    background: rgba(0,0,0,0.4);
+    height: 100%;
+    width: 100%;
+}
+.head{
+    font-size: 45px;
+    margin-top: 60px;
+}
+.headImg{
+    margin-top: 80px;
+}
+.loginInput{
+    margin-top: 60px;
+    border-bottom: white solid 1px;
+    padding-bottom: 2px;
+    padding-left: 2px;
+}
+.loginInput>div:first-child{
+    padding-left: 0;
+    display: inline;
+}
+.loginInput embed{
+    height: 60px;
+    width: 60px;
+    border: none;
+}
+.loginInput input,
+.loginInput select{
+    display: inline;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    height: 60px;
+    margin-left: 20px;
+}
+.loginInput select>option{
+    background-color: #666666;
+    font-size: 14px;
+}
+
+.loginInput input::-webkit-input-placeholder{
+    color: white;
+}
+
+[name=login],
+[name=regist]{
+    background-color: #01cd9a;
+    font-size: 40px;
+    margin-top: 40px;
+    border-radius: 42px;
+    padding: 12px;
+}
+[name=regist]{
+    background-color: rgba(0,0,0,0);
+    border: white solid 2px;
+}
+[name=lookAround]{
+    color: white;
+    font-size: 40px;
+    padding: 50px 0 50px;
+}

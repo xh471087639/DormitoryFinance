@@ -1,0 +1,148 @@
+.mid-topmargin{
+    margin-top: 40px;
+}
+.lg-topmargin{
+    margin-top: 130px;
+}
+.sm-topmargin{
+    margin-top: 20px;
+}
+.sm-leftmargin{
+    margin-left: 10px;
+}
+.sm-toppadding{
+    padding-top: 10px;
+}
+.verticalBottom{
+    vertical-align: bottom;
+}
+
+
+.normalWhite{
+    color: white;
+}
+.registGreen{
+    color: #01cd9a;
+}
+.line{
+    position: relative;
+    height: 20px;
+    border-bottom: #adadad 2px solid;
+
+}
+.opening{
+    background: rgba(0,0,0,0);
+    border: #01cd9a solid 2px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 10px;
+
+}
+
+
+.gate {
+    display: inline-block;
+    padding: 10px 0 10px 15px;
+    font-family: "Open Sans", sans;
+    font-weight: 400;
+    color: #377D6A;
+    background: white;
+    border-radius: 3px;
+    outline: 0;
+    text-indent: 50%;
+    border: solid #efefef 2px;
+/ / Arbitrary . transition: all .3 s ease-in-out;
+    margin-top: 20px;
+}
+.gate::-webkit-input-placeholder {
+     color: #efefef;
+     text-indent: 0;
+     font-weight: 300;
+ }
+.gate + label {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 15px;
+    text-shadow: 0 1px 0 rgba(19, 74, 70, .4);
+    background: #efefef;
+    transition: all .4s ease-in-out;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    transform-origin: left bottom;
+    z-index: 99;
+    font-weight: normal;
+    border: solid #efefef 2px;
+    margin-top: 20px;
+}
+
+.gate:before,
+.gate:after {
+     content: "";
+     position: absolute;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     border-radius: 3px;
+     background: #d6e9c6;
+     transform-origin: left bottom;
+     transition: all .4s ease-in-out;
+     pointer-events: none;
+     z-index: -1;
+ }
+.gate:before {
+     background: rgba(3,36,41,.2);
+     z-index: -2;
+     right: 20%;
+ }
+
+span:nth-child(2) .gate {
+    text-indent: 50%;
+}
+span:nth-child(2) .gate:focus,
+span:nth-child(2) .gate:active{
+    text-indent: 0;
+}
+.gate:focus,
+.gate:active {
+    color: #377D6A;
+    text-indent: 0;
+    background: #fff;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.gate:active::-webkit-input-placeholder {
+     color: #aaa;
+ }
+.gate:focus+ label {
+    transform: rotate(-66deg);
+    border-radius: 3px;
+}
+.gate:focus:before {
+     transform: rotate(10deg);
+ }
+
+
+
+.PromptBox{
+    position: fixed;
+    bottom: 150px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 17px;
+    color: white;
+    font-weight: bold;
+    margin-left: 10%;
+    width:80%;
+    border: none;
+    padding-top: 0px;
+    text-align: center;
+    padding: 5px;
+    font-size: 31px;
+}

@@ -2,9 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.35">
     <title>登陆页</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.css">
+    <link rel="stylesheet" href="../lib/css/animate.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
+    <div class="main">
+        <div class="head col-sm-12">
+            <div class="col-sm-12 text-center">欢迎登陆</div>
+        </div>
 
+        <div class="body col-sm-12" id="body">
+            <div class="col-sm-offset-4 col-sm-4 headImg">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <img class="img-circle col-sm-10 col-sm-offset-1" src="../img/headImg.jpg">
+                </div>
+                <div class="col-sm-10 col-sm-offset-1 text-center sm-topmargin">
+                    {{defaultName}}
+                </div>
+            </div>
+
+            <div class="col-sm-12 lg-topmargin">
+                <div class="loginInput col-sm-10 col-sm-offset-1 ">
+                    <div class="col-sm-1">
+                        <embed src="../svg/username.svg">
+                    </div>
+
+                    <input class="col-sm-10"  name="username" tabindex="0" type="text" placeholder="请输入用户名" v-model="username" @blur="checkUserName">
+                </div>
+                <div class="loginInput col-sm-10 col-sm-offset-1">
+                    <div class="col-sm-1">
+                        <embed src="../svg/password.svg">
+                    </div>
+                    <input class="col-sm-10" name="password" tabindex="1" type="password" placeholder="请输入密码" v-model="password" @blur="checkPassword">
+                </div>
+            </div>
+
+            <div class="col-sm-12 mid-topmargin">
+                <div class="col-sm-10 col-sm-offset-1 mid-topmargin">
+                    <button class="btn btn-success col-sm-12" name="login" @click="login">登陆</button>
+                </div>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <button class="btn btn-success col-sm-12" name="regist" @click="toRegist">注册</button>
+                </div>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <a class="text-center col-sm-12" name="lookAround" href="index.html">随便看看</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="foot col-sm-12">
+            <div class="mid-topmargin">
+                <div class="line col-sm-2 col-sm-offset-2"></div>
+                <div class="col-sm-4 text-center">第三方账号登陆</div>
+                <div class="line col-sm-2"></div>
+            </div>
+            <div class="sm-topmargin col-sm-12">
+                <div class="col-sm-2 col-sm-offset-3">
+                    <embed class="col-sm-12" src="../svg/QQ.svg">
+                </div>
+                <div class="col-sm-2 ">
+                    <embed class="col-sm-12" src="../svg/wechat.svg">
+                </div>
+                <div class="col-sm-2 ">
+                    <div class="col-sm-12 text-center opening">开发ing</div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 lg-topmargin">
+                <div class="col-sm-8 col-sm-offset-2 text-center">
+                    该技术由创数软件团队-夏浩提供
+                </div>
+            </div>
+        </div>
+
+    </div>
 </body>
+<script src="../lib/js/jquery-3.3.1.js"></script>
+<script src="../lib/js/vue.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/login.js"></script>
 </html>

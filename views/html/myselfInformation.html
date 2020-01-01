@@ -2,9 +2,312 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.35">
     <title>管理页</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.css">
+    <link rel="stylesheet" href="../lib/css/animate.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/myselfInformation.css">
 </head>
 <body>
+<div id="main">
+    <div class="main col-sm-12" >
+        <div class="head col-sm-12">
+            <div class="information mid-topmargin col-sm-12">
+                <div class="pull-left col-sm-9">
+                    <h1 class="pull-left">{{name}}</h1><embed class="pull-left" src="../svg/male.svg">
+                </div>
+                <div class="pull-right col-sm-3"><img class="col-sm-12 img-circle" src="../img/headImg.jpg"></div>
+                <div class="pull-left col-sm-9 text-muted">
+                    <h3>用户名:{{username}}</h3>
+                </div>
+
+            </div>
+
+            <div class="navbar navbar-default col-sm-12 navInformation">
+                <ul class="nav navbar-nav col-sm-12 text-center">
+
+                    <li class="col-sm-3" v-bind:class="{'active':inMyselfInformation}">
+                        <a class="" href="#" @click="inMessage=false,inDormitory=false,inMyselfInformation=true,inFinancial=false,edit=false,choseAll=true,checkedAll(),$('#checkedAll').prop('checked',false)">个人信息</a>
+                    </li>
+                    <li class="col-sm-3" v-bind:class="{'active':inMessage}">
+                        <a class="" href="#" @click="inMessage=true,inDormitory=false,inMyselfInformation=false,inFinancial=false,edit=false,choseAll=true,checkedAll(),$('#checkedAll').prop('checked',false)">消息</a>
+                    </li>
+                    <li class="col-sm-3" v-bind:class="{'active':inDormitory}">
+                        <a class="" href="#" @click="inMessage=false,inDormitory=true,inMyselfInformation=false,inFinancial=false,edit=false,choseAll=true,checkedAll(),$('#checkedAll').prop('checked',false)">宿舍管理</a>
+                    </li>
+                    <li class="col-sm-3" v-bind:class="{'active':inFinancial}">
+                        <a class="" href="#" @click="inMessage=false,inDormitory=false,inMyselfInformation=false,inFinancial=true,edit=false,choseAll=true,checkedAll(),$('#checkedAll').prop('checked',false)">宿舍财务</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div class="body message col-sm-12 animated" id="message"  v-bind:class="{'bounceInRight':inMessage,'bounceOutLeft':!inMessage,'hidden':!inMessage}">
+            <div class="col-sm-12">
+                <h1 class="pull-left">我的消息</h1>
+                <button class="pull-right btn" @click="edit=!edit"><span v-if="!edit">编辑</span><span class="cancelColor" v-if="edit">取消</span></button>
+            </div>
+
+            <!--<div class="messageDetail col-sm-12">-->
+                <!--<div v-bind:class="{'hidden':!edit}">-->
+                    <!--<input id="color-input-red" class="chat-button-location-radio-input" type="checkbox" name="color-input-red" value="#f0544d" />-->
+                    <!--<label v-bind:style="{}" for="color-input-red"></label >-->
+                <!--</div>-->
+                <!--<div v-bind:class="{'col-sm-12':!edit,'col-sm-10':edit,'col-sm-offset-2':edit,}">-->
+                    <!--<h1>{{title}}</h1>-->
+                    <!--<h3>{{detail}}}</h3>-->
+                    <!--<h3 class="text-muted text-right">{{time}}</h3>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="messageDetail col-sm-12" v-for="message in messages" v-bind:type="message.type" >
+                <div v-bind:class="{'hidden':!edit}">
+                    <input class="chat-button-location-radio-input" type="checkbox" name="color-input-red" v-bind:value="message.messageId"  v-model="checkedMessage"/>
+                    <label v-bind:for="message.messageId"></label >
+                </div>
+                <div v-bind:class="{'col-sm-12':!edit,'col-sm-10':edit,'col-sm-offset-2':edit,}" v-bind:id="message.messageId" @click="processInformation">
+                    <h1>{{message.title}}</h1>
+                    <h3>{{message.detail}}</h3>
+                    <h3 class="text-muted text-right">{{message.time}}</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class=" dormitory col-sm-12 animated " v-bind:class="{'bounceInRight':inDormitory,'bounceOutLeft':!inDormitory,'hidden':!inDormitory}">
+            <div class="col-sm-12 dormitoryManage" data-toggle="collapse"  data-target="#DormitoryInformation">
+                <a class="">我的宿舍<span class="text-muted" v-bind:class="{'hidden':!dormitoryId==''}">(您还没有宿舍)</span></a>
+                <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+            </div>
+            <div class="col-sm-12 collapse in" id="DormitoryInformation">
+                <div class="col-sm-12" data-toggle="modal" data-target="#changeInformationModal" v-bind:class="{'hidden':dormitoryId}" @click="modal.modalHead='修改宿舍名',modal.modalInput='宿舍名',modal.sureAim='editDormitoryName'">
+                    <span class="pull-left">宿舍名:</span>
+                    <div class="pull-right">
+
+                        <span class="text-muted ">{{dormitoryName}}</span>
+                        <span class="text-muted glyphicon glyphicon-chevron-right sm-leftmargin"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <span class="pull-left">宿舍成员:</span><span class="text-muted pull-right">{{dormitoryMember}}</span>
+                </div>
+
+                <div class="col-sm-12">
+                    <span class="pull-left">宿舍身份:</span><span class="text-muted pull-right">{{dormitoryIdentity}}</span>
+                </div>
+            </div>
+
+
+            <div class="col-sm-12 dormitoryManage" data-toggle="collapse"  data-target="#DormitoryManage">
+                <a class="">宿舍管理</a>
+                <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+            </div>
+            <div class="col-sm-12 collapse in changeDI" id="DormitoryManage">
+                <div class="col-sm-12" data-toggle="modal" data-target="#changeInformationModal" @click="modal.modalHead='创建宿舍',modal.modalInput='宿舍名',modal.sureAim='createDormitory'">
+                    <span class="pull-left">创建宿舍</span>
+                    <div class="pull-right">
+                        <span class="text-muted glyphicon glyphicon-chevron-right sm-leftmargin"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12" v-bind:class="{'hidden':dormitoryId==''}" data-toggle="modal" data-target="#changeInformationModal" v-bind:class="{'hidden':dormitoryId}" @click="modal.modalHead='权限转让',modal.modalInput='用户名',modal.sureAim='transferOfAuthority'">
+                    <span class="pull-left">权限转让</span>
+                    <div class="pull-right">
+                        <span class="text-muted glyphicon glyphicon-chevron-right sm-leftmargin"></span>
+                    </div>
+                </div>
+
+                <div class="col-sm-12"  data-toggle="modal" data-target="#changeInformationModal" v-bind:class="{'hidden':dormitoryId==''}" @click="modal.modalHead='邀请加入',modal.modalInput='用户名',modal.sureAim='toInvitation'">
+                    <span class="pull-left">邀请加入</span>
+                    <div class="pull-right">
+                        <span class="text-muted glyphicon glyphicon-chevron-right sm-leftmargin"></span>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="myselfInformation col-sm-12 animated" v-bind:class="{'bounceInRight':inMyselfInformation,'bounceOutLeft':!inMyselfInformation,'hidden':!inMyselfInformation}">
+                <div class="col-sm-12 dormitoryManage" data-toggle="collapse"  data-target="#myselfInformation">
+                    <a class="">我的信息</a>
+                    <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                </div>
+                <div class="col-sm-12 collapse in" id="myselfInformation">
+                    <div class="col-sm-12">
+                        <span class="pull-left">用户名</span><span class="text-muted pull-right">{{username}}</span>
+
+                    </div>
+
+                    <div class="col-sm-12">
+                        <span class="pull-left">姓名</span><span class="text-muted pull-right">{{name}}</span>
+
+                    </div>
+
+                    <div class="col-sm-12 verticalBottom">
+                        <span class="">邮箱</span>
+                        <div class="pull-right">
+                            <span class="text-muted ">{{mail}}</span>
+                            <span class="text-muted glyphicon glyphicon-chevron-right sm-leftmargin"></span>
+                        </div>
+
+
+                    </div>
+
+                </div>
+        </div>
+
+        <div class="body message col-sm-12 animated" id="financial"  v-bind:class="{'bounceInRight':inFinancial,'bounceOutLeft':!inFinancial,'hidden':!inFinancial}">
+            <div class="col-sm-12">
+                <h1 class="pull-left">财务管理</h1>
+                <button class="pull-right btn" @click="edit=!edit"><span v-if="!edit">编辑</span><span class="cancelColor" v-if="edit">取消</span></button>
+                <button class="pull-right btn link" @click="getDormitoryFinancialExample">下载报表样例</button>
+            </div>
+
+            <table class="col-sm-12 text-center">
+                <thead>
+                <tr>
+                    <th class="text-center" v-bind:class="{'hidden':!edit}">选中</th>
+                    <th class="text-center">支出/收入</th>
+                    <th class="text-center">条款备注</th>
+                    <th class="text-center" v-bind:class="{'hidden':!edit}">使用对象</th>
+                    <th class="text-center">时间</th>
+                </tr>
+                </thead>
+                <tbody class="mid-topmargin">
+                <tr v-for="gal in getAllFinancial">
+                    <td v-bind:class="{'hidden':!edit}">
+                        <input v-bind:id="gal._id" class="chat-button-location-radio-input" v-model="checkedFinancial" type="checkbox" name="color-input-red" v-bind:value="gal._id" />
+                        <label v-bind:style="{}" v-bind:for="gal._id"></label >
+                    </td>
+
+                    <td v-bind:class="{'red':parseInt(gal.money)<0,'green':parseInt(gal.money)>0}">{{gal.money}}</td>
+                    <td>{{gal.notes}}</td>
+                    <td v-bind:class="{'hidden':!edit}" >{{gal.menber}}</td>
+                    <td>{{gal.time}}</td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <div class="col-sm-12 nextPage text-center" @click="getFinancial">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </div>
+
+            <div id="newLocalFinancial" class="col-sm-12 mid-topmargin" v-bind:class="{'hidden':!inNewLocalFinancial || !edit}">
+                <div class="col-sm-6">
+                    <span>
+                        <input class="gate col-sm-12" type="text" placeholder="支出/收入" v-model="financial.money"/>
+                        <label for="class">支出/收入</label>
+                    </span>
+                </div>
+                <div class="col-sm-6">
+                <span>
+                     <input class="gate col-sm-12" type="text"  placeholder="条款备注" v-model="financial.notes" />
+                     <label for="class">条款备注</label>
+                 </span>
+                </div>
+                <div class="col-sm-6">
+                <span>
+                     <input class="gate col-sm-12" type="text" placeholder="使用对象" v-model="financial.menber" />
+                     <label for="class">使用对象</label>
+                 </span>
+                </div>
+                <div class="col-sm-6">
+                <span>
+                     <input class="gate col-sm-12" type="text" placeholder="时间" v-model="financial.time" />
+                     <label for="class">时间</label>
+                 </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="foot col-sm-12">
+        <div class="col-sm-12 edit " v-bind:class="{'hidden':!edit}">
+            <div v-bind:class="{'col-sm-2':edit,'hidden':!edit}" class="pull-left">
+                <input id="checkedAll" class="chat-button-location-radio-input" type="checkbox" name="color-input-red" value="#f0544d" />
+                <label for="checkedAll" @click="checkedAll"></label >
+            </div>
+            <div class="pull-left">全选</div>
+
+            <button class="pull-right btn delete" v-bind:class="{'hidden':!edit||!inMessage}" @click="">删除</button>
+            <button class="pull-right btn delete" v-bind:class="{'hidden':!edit||!inFinancial}" @click="deleteFinancial">删除</button>
+            <button v-bind:class="{'hidden':!edit||!inFinancial}" class="pull-right btn success" @click="inNewLocalFinancial=!inNewLocalFinancial">
+                <span v-bind:class="{'hidden':inNewLocalFinancial}">新增</span>
+                <span v-bind:class="{'hidden':!inNewLocalFinancial}" @click="addFinancial">确定</span>
+            </button>
+
+            <button v-bind:class="{'hidden':!edit||!inFinancial}" class="pull-right btn success" @click="choseExcel=!choseExcel">
+                <span v-bind:class="{'hidden':choseExcel} " @click="$('#batchUpload').click()">导入报表</span>
+                <span v-bind:class="{'hidden':!choseExcel}" @click="batchUpload">确定导入</span>
+            </button>
+
+        </div>
+
+        <div class="modal fade col-sm-10 col-sm-offset-1" id="changeInformationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="col-sm-12">
+                <div class="modal-content col-sm-12">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">{{modal.modalHead}}</h4>
+                    </div>
+                    <div class="modal-body col-sm-12">
+                        <span class="pull-left">{{modal.modalInput}}:</span>
+                        <input class="col-sm-8 pull-left" type="text" v-model="modal.modalInputValue">
+                    </div>
+                    <div class="modal-footer col-sm-12">
+                        <button class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button class="btn btn-primary" v-on:click="branchExecution">确定</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+        <div class="modal fade col-sm-10 col-sm-offset-1" id="processInformation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="col-sm-12">
+                <div class="modal-content col-sm-12">
+                    <div class="modal-header col-sm-12">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">消息处理</h4>
+                    </div>
+                    <div class="modal-body col-sm-12">
+                            <div class="col-sm-12">
+                                <h1>{{processInformations.title}}</h1>
+                                <h3>{{processInformations.detail}}</h3>
+                                <h3 class="text-muted text-right">{{processInformations.time}}</h3>
+                            </div>
+                    </div>
+                    <div class="modal-footer col-sm-12">
+                        <div class="">
+                            <button class="btn btn-default col-sm-4 col-sm-offset-1" data-dismiss="modal" @click="confirmRefuse">拒绝</button>
+                        </div>
+
+                        <div>
+                            <button class="btn btn-primary col-sm-4 col-sm-offset-2" v-on:click="confirmAccession">同意</button>
+                        </div>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+        <div class="hidden">
+            <input type="file" id="batchUpload" @change="choseFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </div>
+    </div>
+</div>
+
+
 
 </body>
+<script src="../lib/js/jquery-3.3.1.js"></script>
+<script src="../lib/js/bootstrap.js"></script>
+<script src="../lib/js/vue.min.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/myselfInformation.js"></script>
 </html>

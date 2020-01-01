@@ -4,6 +4,8 @@ const fs=require('fs');
 const multiparty=require('multiparty');
 const mongodb= require('mongodb');
 const express=require('express');
+const excel=require('exceljs');
+const xlsx = require('node-xlsx');
 
 
 const userModels=require('../models/user');
@@ -11,7 +13,7 @@ const dormitoryModels=require('../models/dormitory');
 const powerModels=require('../models/power');
 const userMessageModels=require('../models/userMessage');
 const dormitoryCostModels=require('../models/dormitoryCost');
-
+console.log(path.resolve('./public/exampleFile/dormitoryFinancialExample.xlsx'))
 
 const router=express.Router();
 
@@ -23,7 +25,7 @@ router.get('/',function (req,res,next) {
 router.post('/addDormitoryCost',function (req,res,next) {
     let form=new multiparty.Form();
     form.parse(req,function (err,fields,file) {
-        console.log(req.session);
+
         let costInformation={
         };
         try {
@@ -100,7 +102,9 @@ router.post('/deleteDormitoryCost',function (req,res,next) {
             if (!fields.dormitoryCostId[0]){
                 throw new Error('请输入要删除的财务变动id');
             }
-
+            if (!req.session.power.delete){
+                throw new Error('您没有删除权限');
+            }
         }catch (e) {
             res.json({
                 'status':'203',
@@ -108,36 +112,16 @@ router.post('/deleteDormitoryCost',function (req,res,next) {
             })
             return res.send();
         }
-
+        let msg;
+        let dormitoryCostId=fields.dormitoryCostId[0].split(',');
         dormitoryCostModels
-            .findDormitoryCost(mongodb.ObjectID(fields.dormitoryCostId[0]))
+            .deleteDormitoryCost(dormitoryCostId,req.session.user.dormitoryId.toString())
             .then(function (result) {
-                try {
-                    console.log(fields.dormitoryCostId[0],result.dormitoryId,req.session.user.dormitoryId)
-                    if (result[0].dormitoryId!=req.session.user.dormitoryId){
-                        throw new Error('您不是该宿舍的人员无权进行修改');
-                    }
-                    if (!req.session.power.delete){
-                        throw new Error('您没有删除权限');
-                    }
-                } catch (e) {
-                    res.json({
-                        'status':'202',
-                        'msg':e.message
-                    })
-                    return res.send();
-                }
-                dormitoryCostModels
-                    .deleteDormitoryCost(fields.dormitoryCostId[0])
-                    .then(function (result) {
-                        console.log(result);
-                        res.json({
-                            'status':'200',
-                            'msg':'添加财务变动成功'
-                        })
-                        return res.send();
-                    })
-
+                res.json({
+                    'status':'200',
+                    'msg':'已进行删除'
+                })
+                return res.send();
             })
 
 
@@ -156,7 +140,7 @@ router.post('/getDormitoryCost',function (req,res,next) {
                 throw new Error('您还未加入宿舍');
             }
             if (fields){
-                fields?page=fields.page[0]:void (0);
+                fields.page?page=parseInt(fields.page[0]):void (0);
             }
         }catch (e) {
             res.json({
@@ -169,7 +153,7 @@ router.post('/getDormitoryCost',function (req,res,next) {
         dormitoryCostModels
             .findCostByDormitory(req.session.user.dormitoryId,page)
             .then(function (result) {
-                        console.log(result);
+
                         res.json({
                             'status':'200',
                             'msg':result
@@ -182,5 +166,68 @@ router.post('/getDormitoryCost',function (req,res,next) {
 
     })
 })
+
+router.post('/batchUpload',function (req,res,next) {
+    let form=new multiparty.Form();
+    form.parse(req,function (err,fields,files) {
+        let page=1;
+        try {
+            if (!req.session.user.userId){
+                throw new Error('请先登录');
+            }
+            if (!req.session.user.dormitoryId){
+                throw new Error('您还未加入宿舍');
+            }
+
+        }catch (e) {
+            fs.unlink(files.file[0].path);
+            res.json({
+                'status':'203',
+                'msg':e.message
+            })
+            return res.send();
+        }
+        let excel=xlsx.parse(files.file[0].path)[0].data;
+        let headTitle=excel.shift();
+        if (headTitle[0]!='收入/支出'||headTitle[1]!='日期'||headTitle[2]!='备注'||headTitle[3]!='对象成员'){
+            res.json({
+                'status':'202',
+                'msg':'您的样例文件不正确，无法处理，请重新下载最新的样例'
+            })
+            return res.send();
+        }else {
+            dormitoryCostModels
+                .batchUploadDormitoryCost(excel,req.session.user.dormitoryId)
+                .then(function (result) {
+                    fs.unlink(files.file[0].path,function () {
+                        res.json({
+                            'status':'200',
+                            'msg':'已进行数据导入'
+                        })
+                        return res.send();
+                    });
+                })
+        }
+        
+
+
+    })
+})
+
+router.get('/getDormitoryFinancialExampleFile',function (req,res,next) {
+
+    var name = 'dormitoryFinancialExample.xlsx';
+    var path = './public/exampleFile/dormitoryFinancialExample.xlsx';
+    var size = fs.statSync(path).size;
+    var f = fs.createReadStream(path);
+    res.writeHead(200, {
+        'Content-Type': 'application/force-download',
+        'Content-Disposition': 'attachment; filename=' + name,
+        'Content-Length': size
+    });
+    f.pipe(res);
+
+})
+
 
 module.exports=router;

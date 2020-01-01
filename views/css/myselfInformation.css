@@ -1,0 +1,263 @@
+body{
+    overflow-x:hidden;
+    background-color: #f7f5f6;
+    height: 100%;
+    width: 100%;
+    font-size: 34px;
+    position: absolute;
+}
+.head,
+.body,
+.foot,
+.dormitory>div,
+.myselfInformation>div{
+    background-color: white;
+    font-size: 35px;
+}
+.body{
+    margin-top: 50px;
+}
+.main{
+    padding: 0;
+}
+.foot{
+    position: fixed;
+    bottom: 0;
+}
+
+
+
+
+.information h1{
+    font-size: 60px;
+    margin: 0;
+}
+.information h3{
+    font-size: 26px;
+}
+.information embed{
+    width: 45px;
+    height: 45px;
+    vertical-align: bottom;
+    margin-left: 20px;
+    display: inline;
+    margin-top: 20px;
+
+}
+.navInformation{
+    background-color: white;
+    margin-top: 80px;
+    padding: 0;
+    border-left:none ;
+    border-right: none;
+    font-size: 35px;
+}
+.navInformation li{
+    padding: 8px;
+}
+.active>a{
+    color: #67b168!important;
+    background-color: white!important;
+    border-bottom: #67b168 solid 2px;
+}
+.message>div{
+    border-bottom: rgba(0,0,0,0.2) 2px solid;
+}
+.message>div:first-child>button,
+.delete,
+.success,
+.sure,
+.cancel,
+.link{
+    background-color: rgba(0,0,0,0);
+    color: #67b168;
+    font-size: 32px;
+    border: none;
+    margin-top: 10px;
+}
+.delete{
+    color: rgba(255,0,0,0.48);
+    font-size: 36px;
+}
+.red{
+    color: rgba(255,0,0,0.48);
+}
+.green{
+    color: rgba(82,184,19,0.48);
+}
+.success{
+    color: rgba(82,184,19,0.48);
+    font-size: 36px;
+    margin-right: 30px;
+}
+.link{
+    color: rgba(35,183,229,0.9)!important;
+    font-size: 36px;
+    margin-right: 30px;
+}
+.sure{
+    color: #67b168;
+    font-size: 36px;
+    margin-left: 30px;
+}
+.cancel{
+    color: #e5e5e5;
+    font-size: 36px;
+}
+.cancelColor{
+    color: #e5e5e5;
+}
+
+
+.delete:checked{
+    color: rgba(255,0,0,0.48);
+}
+.message>div:last-child{
+    border: none;
+}
+.messageDetail{
+    padding-top: 10px;
+}
+.messageDetail>div:first-child{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+.messageDetail h1{
+    font-size: 35px;
+
+}
+.messageDetail h3{
+    font-size: 32px;
+
+}
+
+.dormitory,
+.myselfInformation{
+    padding: 0;
+    margin-top: 30px;
+}
+.dormitory>div,
+.myselfInformation>div{
+    padding:20px 30px;
+}
+.dormitoryManage:nth-of-type(1),
+.myselfInformation>div:first-child{
+    margin-top: 5px;
+}
+
+.dormitoryManage,
+.myselfInformation>div:first-child{
+    padding: 15px;
+    border-bottom: rgba(0,0,0,0.2) solid 2px;
+    margin-top: 20px;
+}
+
+.nextPage>span{
+    color: rgba(0,0,0,0.4);
+    font-size:42px;
+}
+
+#DormitoryInformation>div,
+#DormitoryManage>div,
+#myselfInformation>div,
+#financial>div{
+    border-bottom: rgba(0,0,0,0.15) solid 1px;
+    padding: 15px;
+}
+#financial{
+    margin-bottom: 100px;
+}
+#financial th{
+    padding: 15px 0;
+}
+#financial tbody>tr>td{
+    padding: 10px 0;
+}
+#financial table{
+    padding: 0;
+}
+#financial thead{
+    border-bottom: rgba(0,0,0,0.15) solid 1px;
+}
+
+
+
+.edit{
+    height: 110px;
+    padding-top: 20px;
+
+}
+.edit>div{
+    margin-top: 17px;
+    padding-left: 0;
+}
+
+
+#newLocalFinancial{
+    border-top: rgba(0,0,0,0.15) solid 1px;
+}
+
+#changeInformationModal .modal-body>input{
+    border: none;
+}
+#changeInformationModal .modal-content h4,
+#processInformation .modal-content h4{
+    font-size: 43px;
+}
+#changeInformationModal .modal-body,
+#processInformation .modal-body{
+    border-bottom: #67b168 solid 2px;
+}
+#changeInformationModal .modal-body span,
+#processInformation .modal-body span{
+    font-size: 35px;
+    vertical-align: bottom;
+}
+#changeInformationModal,
+#processInformation{
+    position: fixed;
+    height: 300px;
+    top:200px;
+}
+#processInformation{
+    height: 400px;
+}
+
+
+
+
+/*__________________________________________________________________________________________*/
+/*lable标签的大小、位置、背景颜色更改，在css选择时，“+”代表相邻元素，即当前元素的下一元素*/
+[type=checkbox]{
+    display: none;
+}
+[type=checkbox] +label{
+    display: block;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    position: relative;
+    top: 2px;
+    left: 15px;
+    background: rgba(0,0,0,0);
+    border: #67b168 solid 2px ;
+    border-radius: 40px;
+    overflow: hidden;
+}
+
+/*当input框为选中状态时，lable标签的样式，其中在css选择时，“：”表示当前input框的值，即checked；
+      该部分主要对显示的“对号”的大限居中方式，显示颜色进行了设置*/
+[type=checkbox]:checked +label::before {
+    display: block;
+    content: "\2714";
+    text-align: center;
+    font-size: 38px;
+    color: white;
+    background: #67b168;
+}
+[type=checkbox] +label +div{
+    vertical-align: middle;
+    display: inline;
+}
+

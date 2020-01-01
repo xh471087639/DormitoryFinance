@@ -43,6 +43,9 @@ router.post('/',function (req,res,next) {
                         "msg":e.message});
                     return res.send();
                 }
+                delete result.password;
+                delete result._id;
+
                 req.session.user=result;
 
                 powerModels
