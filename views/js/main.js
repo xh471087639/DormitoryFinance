@@ -1,4 +1,6 @@
-const URL='http://localhost:6767';
+// const URL='http://localhost:6767';
+const URL='http://139.196.220.58:32121';
+
 const fileURL='http://114.115.156.4:9494';
 
 let CreatPromptBox =function(){
