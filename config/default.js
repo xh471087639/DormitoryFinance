@@ -1,6 +1,6 @@
 module.exports={
     // port:6767,
-    port:32121,
+    port:8321,
     session:{
         secret: 'session',
         key: 'DF',
