@@ -47,7 +47,7 @@ $(document).ready(function () {
                 }
             },
             toRegist:function(){
-                window.location.href='regist.html';
+                window.location='../regist/';
             },
             login:function() {
                 let checkEnd=this.checkUserName()&&this.checkPassword();
@@ -62,7 +62,7 @@ $(document).ready(function () {
                         successCallback:function (result) {
                             PromptBox.displayPromptBox('登陆成功');
                             setTimeout(function () {
-                                window.location='myselfInformation/'
+                                window.location='../myselfInformation/'
                                 // window.location='financialManagement.html'
                             },1000)
 

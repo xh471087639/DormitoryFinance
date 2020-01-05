@@ -271,6 +271,9 @@ $(document).ready(function () {
                     detail:formdata,
                     successCallback:function (result) {
                         PromptBox.displayPromptBox('添加成功');
+                        setTimeout(function () {
+                            window.location.href='../myselfInformation/'
+                        },1000)
                     },
                     errorCallback:function (result) {
                         PromptBox.displayPromptBox('由于'+result.msg+',权限转让失败,请重试');
@@ -308,7 +311,7 @@ $(document).ready(function () {
                     successCallback:function (result) {
                         PromptBox.displayPromptBox('删除成功');
                         setTimeout(function () {
-                            window.location.href='myselfInformation.html'
+                            window.location.href='../myselfInformation/'
                         },1000)
                     },
                     errorCallback:function (result) {
@@ -317,6 +320,7 @@ $(document).ready(function () {
                 }).init();
             },
             batchUpload:function(){
+                PromptBox.displayPromptBox('开始上传请等待');
                 let that=this;
                 let formdata=new FormData();
                 formdata.append('file',that.file);
@@ -325,7 +329,10 @@ $(document).ready(function () {
                     method:'POST',
                     detail:formdata,
                     successCallback:function (result) {
-                        that.getAllFinancial=result.msg;
+                        PromptBox.displayPromptBox('批量导入成功');
+                        setTimeout(function () {
+                            window.location.href='../myselfInformation/'
+                        },1000)
                     },
                     errorCallback:function (result) {
                         PromptBox.displayPromptBox('由于'+result.msg+',权限转让失败,请重试');

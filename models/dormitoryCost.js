@@ -25,6 +25,7 @@ module.exports={
     findCostByDormitory:function (dormitoryId,page) {
         return dormitoryCost
             .find({dormitoryId:dormitoryId})
+            .sort({_id:-1})
             .limit(10)
             .skip((page-1)*10)
             .exec();
@@ -33,17 +34,19 @@ module.exports={
         let end;
         let x=2;
         for(let i of main){
-            let obj={
-                money:i[0].toString(),
-                time:i[1].toString(),
-                notes:i[2],
-                menber:i[3],
-                dormitoryId:dormitoryId
-            }
 
-            end=dormitoryCost
-                .insert(obj)
-                .exec();
+            if (i[0]){
+                let obj={
+                    money:i[0].toString(),
+                    time:i[1].toString(),
+                    notes:i[2],
+                    menber:i[3],
+                    dormitoryId:dormitoryId
+                }
+                end=dormitoryCost
+                    .insert(obj)
+                    .exec();
+            }
         }
         return end;
     }
