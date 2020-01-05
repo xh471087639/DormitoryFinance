@@ -12,8 +12,9 @@ const userModels=require('../models/user');
 const router=express.Router();
 
 router.get('/',function (req,res,next) {
-    res.render('login', {title: 'HTML'});
+    res.sendFile(path.resolve('./views/html/login.html'));
 })
+
 router.post('/',function (req,res,next) {
     let form=new multiparty.Form();
     form.parse(req,function (err,fileds,file) {

@@ -62,7 +62,7 @@ $(document).ready(function () {
                         successCallback:function (result) {
                             PromptBox.displayPromptBox('登陆成功');
                             setTimeout(function () {
-                                window.location='myselfInformation.html'
+                                window.location='myselfInformation/'
                                 // window.location='financialManagement.html'
                             },1000)
 

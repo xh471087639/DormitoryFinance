@@ -1,0 +1,27 @@
+{
+  "apps":[
+    {
+      "name":"DormitoryFinance",
+      "script":"main.js",
+      "env":{
+        "COMMON_VARIABLE":"true"
+      },
+      "env_production":{
+        "NODE_ENV":"production"
+      }
+    }
+  ],
+  "deploy":{
+    "production":{
+      "user":"root",
+      "host":["139.196.220.58"],
+      "ref":"origin/master",
+      "repo":"git@github.com:xh471087639/DormitoryFinance.git",
+      "path":"/www/website-xh/production",
+      "ssh_options":"StrictHostKeyChecking=no",
+      "env":{
+        "NODE_ENV":"production"
+      }
+    }
+  }
+}

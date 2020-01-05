@@ -13,7 +13,7 @@ const router=express.Router();
 
 
 router.get('/',function (req,res,next) {
-    res.render('myselfManagement', {title: 'HTML'});
+    res.sendFile(path.resolve('./views/html/myselfInformation.html'));
 })
 
 router.post('/getMessage',function (req,res,next) {

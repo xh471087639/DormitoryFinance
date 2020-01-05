@@ -5,7 +5,7 @@ const session=require('express-session');
 const router=express.Router();
 
 router.get('/',function (req,res,next) {
-    res.render('index', {title: 'HTML'});
+    res.send('暂无主页');
 })
 
 module.exports=router;

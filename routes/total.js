@@ -10,7 +10,7 @@ app.use(session(config.session));
 app.use('/index',require('./index'));
 app.use('/informationManagement',require('./informationManagement'));
 app.use('/login',require('./login'));
-app.use('/myselfManagement',require('./myselfManagement'));
+app.use('/myselfInformation',require('./myselfManagement'));
 app.use('/financialManagement',require('./financialManagement'));
 
 module.exports=app;
