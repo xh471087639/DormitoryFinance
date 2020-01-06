@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c96a8002-2f56-4ea2-9712-183e602edc6f" name="默认更改列表" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/default.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/default.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/dormitoryCost.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/dormitoryCost.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/exampleFile/UpLoadDormitoryFinancialExample.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/public/exampleFile/UpLoadDormitoryFinancialExample.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/js/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/js/myselfInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/views/js/myselfInformation.js" afterDir="false" />
-    </list>
+    <list default="true" id="c96a8002-2f56-4ea2-9712-183e602edc6f" name="默认更改列表" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -194,7 +186,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/dormitoryCost.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
+            <state relative-caret-position="72">
               <caret line="35" column="27" lean-forward="true" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
             </state>
           </provider>
@@ -570,7 +562,7 @@
       <path value="$PROJECT_DIR$/node_modules/zip-stream/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="950" />
     <option name="width" value="979" />
     <option name="height" value="1040" />
@@ -602,34 +594,6 @@
               <item name="DormitoryFinance" type="b2602c69:ProjectViewProjectNode" />
               <item name="DormitoryFinance" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DormitoryFinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DormitoryFinance" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DormitoryFinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DormitoryFinance" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DormitoryFinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DormitoryFinance" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DormitoryFinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DormitoryFinance" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="html" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="DormitoryFinance" type="b2602c69:ProjectViewProjectNode" />
-              <item name="DormitoryFinance" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -712,12 +676,12 @@
       <workItem from="1577505748771" duration="20854000" />
       <workItem from="1577859065728" duration="10651000" />
       <workItem from="1578126861106" duration="16688000" />
-      <workItem from="1578220734421" duration="1089000" />
+      <workItem from="1578220734421" duration="4861000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="247594000" />
+    <option name="totallyTimeSpent" value="251366000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -730,19 +694,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" sideWeight="0.5010571" side_tool="true" weight="0.19352709" />
-      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4989429" visible="true" weight="0.20211361" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4989429" visible="true" weight="0.20211361" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="0" weight="0.7733711" />
+      <window_info anchor="bottom" id="Terminal" order="0" visible="true" weight="0.203966" />
       <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.5019815" side_tool="true" weight="0.33002833" />
       <window_info anchor="bottom" id="Version Control" order="2" show_stripe_button="false" />
       <window_info anchor="bottom" id="调试" order="3" weight="0.3286119" />
       <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Find" order="6" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="7" sideWeight="0.4980185" visible="true" weight="0.33002833" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.4980185" weight="0.33002833" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
@@ -1185,7 +1148,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/dormitoryCost.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
+        <state relative-caret-position="72">
           <caret line="35" column="27" lean-forward="true" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
         </state>
       </provider>
